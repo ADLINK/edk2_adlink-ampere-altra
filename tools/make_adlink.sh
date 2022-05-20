@@ -21,9 +21,12 @@ EDK2_PLATFORMS_PKG_DIR=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg
 #
 # Firmware Version
 #
+if [ -z ${VER} ]; then
 VER=2.04
-BUILD=100.03
-
+fi
+if [ -z ${BUILD} ]; then
+BUILD=100.04
+fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
@@ -45,7 +48,7 @@ if  [ "${DEVELMENT_MODE}" == "1" ]; then
         SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.06.20220308.slim \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
-        LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel\
+        LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
         DEBUG=0 \
         VER=$VER BUILD=$BUILD \
         tianocore_img # linuxboot_img # all # tianocore_capsule # 
