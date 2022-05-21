@@ -75,6 +75,7 @@ else
             BOARD_NAME=$BOARD_NAME \
             VM_SHARED_DIR=$HOME/AmpereR \
             CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
+            ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.06.20220308.slim \
             SPI_SIZE_MB=32 \
             VER=$VER BUILD=$BUILD \
             history
