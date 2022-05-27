@@ -27,6 +27,9 @@ fi
 if [ -z ${BUILD} ]; then
 BUILD=100.04
 fi
+if [ -z ${DEBUG} ]; then
+DEBUG=0
+fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
@@ -49,7 +52,7 @@ if  [ "${DEVELMENT_MODE}" == "1" ]; then
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
-        DEBUG=0 \
+        DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
         tianocore_img # linuxboot_img # all # tianocore_capsule # 
 else
