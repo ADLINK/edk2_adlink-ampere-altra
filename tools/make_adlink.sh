@@ -22,10 +22,13 @@ EDK2_PLATFORMS_PKG_DIR=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg
 # Firmware Version
 #
 if [ -z ${VER} ]; then
-VER=2.04
+VER=2.05
 fi
 if [ -z ${BUILD} ]; then
-BUILD=100.06
+BUILD=100.00
+fi
+if [ -z ${DEBUG} ]; then
+DEBUG=0
 fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
@@ -49,7 +52,7 @@ if  [ "${DEVELMENT_MODE}" == "1" ]; then
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
-        DEBUG=0 \
+        DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
         tianocore_img # linuxboot_img # all # tianocore_capsule # 
 else
