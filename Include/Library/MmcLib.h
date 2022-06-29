@@ -31,4 +31,9 @@ MmcPostCode (
   IN UINT32  Value
   );
 
+EFI_STATUS
+MmcSetPowerOffType (
+  IN UINT8  Value
+  );
+
 #endif

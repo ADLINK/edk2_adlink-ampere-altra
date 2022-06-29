@@ -1,13 +1,13 @@
 /** @file
-  The instance of Post Code Library that layers on top of a Debug Library instance.
+  MMC Library.
 
-  Copyright (c) 2006 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ADLink. All rights reserved.<BR>
+
   SPDX-License-Identifier: BSD-2-Clause-Patent
 
 **/
 
 #include <Uefi.h>
-
 #include <Library/UefiLib.h>
 #include <Library/DebugLib.h>
 #include <Library/PrintLib.h>
@@ -33,6 +33,27 @@ MmcPostCode (
     return EFI_INVALID_PARAMETER;
   }
 
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+MmcSetPowerOffType (
+  IN UINT8  Value
+  )
+{
+  UINTN   numofbytes;
+  UINT8   IpmiCmdBuf[] = {"[C0 00 15 01]\r\n"};
+  UINTN   IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+
+  AsciiSPrint ((CHAR8 *)IpmiCmdBuf, sizeof(IpmiCmdBuf), "[C0 00 80 %02X]\r\n", Value);
+
+  DEBUG ((DEBUG_INFO, "%a Write MMC Power off type %d\n", __FUNCTION__, Value));
+  numofbytes = PL011UartWrite ((UINTN)PcdGet64 (PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (numofbytes == 0) {
+    DEBUG ((DEBUG_ERROR, "%a Failed to Write MMC Power off type\n", __FUNCTION__));
+    return EFI_INVALID_PARAMETER;
+  }
   return EFI_SUCCESS;
 }
 
