@@ -34,8 +34,10 @@ PostCode (
   IN UINT32  Value
   )
 {
-  DEBUG ((DEBUG_INFO, "POST %08x\n", Value));
-  MmcPostCode(Value);
+  if (PostCodeEnabled()) {
+    DEBUG ((DEBUG_INFO, "POST %08x\n", Value));
+    MmcPostCode(Value);
+  }
   return Value;
 }
 
@@ -70,8 +72,10 @@ PostCodeWithDescription (
   IN CONST CHAR8  *Description  OPTIONAL
   )
 {
-  DEBUG ((DEBUG_INFO, "POST %08x - %s\n", Value, Description));
-  MmcPostCode(Value);
+  if (PostCodeDescriptionEnabled()) {
+    DEBUG ((DEBUG_INFO, "POST %08x - %s\n", Value, Description));
+    MmcPostCode(Value);
+  }
   return Value;
 }
 

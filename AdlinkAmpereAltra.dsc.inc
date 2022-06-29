@@ -35,6 +35,9 @@
   # set baudrate to match with MMC
   gArmPlatformTokenSpaceGuid.PcdSerialDbgUartBaudRate|57600
 
+  # Enable POST Code 
+  gEfiMdePkgTokenSpaceGuid.PcdPostCodePropertyMask|0x00000008
+
 ################################################################################
 #
 # Specific Platform Component
