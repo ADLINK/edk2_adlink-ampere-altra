@@ -18,18 +18,7 @@ BOARD_NAME=$1
 BOARD_STEPPING=$2
 
 EDK2_PLATFORMS_PKG_DIR=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg
-#
-# Firmware Version
-#
-if [ -z ${VER} ]; then
-VER=2.05
-fi
-if [ -z ${BUILD} ]; then
-BUILD=100.00
-fi
-if [ -z ${DEBUG} ]; then
-DEBUG=0
-fi
+
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
