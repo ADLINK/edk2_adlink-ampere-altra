@@ -32,6 +32,8 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
+  AdlinkAmpereAltraPkg.dec
+  PostCodeDebugFeaturePkg/PostCodeDebugFeaturePkg.dec
 
 [LibraryClasses]
   PeimEntryPoint
@@ -43,6 +45,9 @@
   PrintLib
   DebugLib
   BaseMemoryLib
+  ReportStatusCodeLib
+  PostCodeLib
+  PostCodeMapLib
 
 [Guids]
   ## SOMETIMES_PRODUCES   ## HOB

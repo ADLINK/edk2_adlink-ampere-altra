@@ -65,3 +65,8 @@
       PostCodeMapLib|PostCodeDebugFeaturePkg/Library/PostCodeMapLib/PostCodeMapLib.inf
   }
 
+  MdeModulePkg/Universal/StatusCodeHandler/Pei/StatusCodeHandlerPei.inf {
+    <LibraryClasses>
+      PostCodeLib|Library/PostCodeLibMmc/PostCodeLibMmc.inf
+      PostCodeMapLib|PostCodeDebugFeaturePkg/Library/PostCodeMapLib/PostCodeMapLib.inf
+  }

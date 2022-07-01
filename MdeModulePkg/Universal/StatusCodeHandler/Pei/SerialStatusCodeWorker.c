@@ -6,6 +6,8 @@
 **/
 
 #include "StatusCodeHandlerPei.h"
+#include <Library/PostCodeLib.h>
+#include <Library/PostCodeMapLib.h>
 
 /**
   Convert status code value and extended data to readable ASCII string, send string to serial I/O device.
@@ -49,6 +51,7 @@ SerialStatusCodeReportWorker (
   UINT32     LineNumber;
   UINTN      CharCount;
   BASE_LIST  Marker;
+  UINT8      postcode;
 
   Buffer[0] = '\0';
 
@@ -158,6 +161,10 @@ SerialStatusCodeReportWorker (
   // Call SerialPort Lib function to do print.
   //
   SerialPortWrite ((UINT8 *)Buffer, CharCount);
+
+  // DEBUG ((DEBUG_INFO, "POST Code PEI\n"));
+  postcode=GetPostCodeFromStatusCode(CodeType, Value);
+  PostCode(postcode);
 
   return EFI_SUCCESS;
 }
