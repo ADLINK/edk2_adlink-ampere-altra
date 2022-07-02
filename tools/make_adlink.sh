@@ -25,7 +25,7 @@ if [ -z ${VER} ]; then
 VER=2.04
 fi
 if [ -z ${BUILD} ]; then
-BUILD=100.04
+BUILD=100.00
 fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
