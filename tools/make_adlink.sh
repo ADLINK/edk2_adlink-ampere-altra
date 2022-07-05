@@ -19,6 +19,18 @@ BOARD_STEPPING=$2
 
 EDK2_PLATFORMS_PKG_DIR=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg
 
+#
+# Firmware Version
+#
+if [ -z ${VER} ]; then
+VER=2.06
+fi
+if [ -z ${BUILD} ]; then
+BUILD=100.01
+fi
+if [ -z ${DEBUG} ]; then
+DEBUG=0
+fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
@@ -36,8 +48,8 @@ if  [ "${DEVELMENT_MODE}" == "1" ]; then
         VM_SHARED_DIR=$HOME/AmpereR \
         CHECKSUM_TOOL=$OEM_CHIPTOOL_DIR/checksum \
         PACKAGES_PATH=$OEM_PLATFORM_DIR:$OEM_CHIP_DIR:$WORKSPACE/edk2-platforms/Features/Intel/Debugging:$WORKSPACE/OpenPlatformPkg:"${PACKAGES_PATH}" \
-        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.06.20220308.slim \
-        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.06.20220308.slim \
+        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
+        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.10.20220531.slim \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
@@ -52,8 +64,8 @@ else
         VM_SHARED_DIR=$HOME/AmpereR \
         CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
         PACKAGES_PATH=$OEM_PLATFORM_DIR:$OEM_CHIP_DIR:$WORKSPACE/edk2-platforms/Features/Intel/Debugging:$WORKSPACE/OpenPlatformPkg:"${PACKAGES_PATH}" \
-        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.06.20220308.slim \
-        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.06.20220308.slim \
+        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
+        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.10.20220531.slim \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
@@ -67,7 +79,7 @@ else
             BOARD_NAME=$BOARD_NAME \
             VM_SHARED_DIR=$HOME/AmpereR \
             CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
-            ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.06.20220308.slim \
+            ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
             SPI_SIZE_MB=32 \
             VER=$VER BUILD=$BUILD \
             history
