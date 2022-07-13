@@ -18,6 +18,6 @@
   ##  @libraryclass  
   ##
   MmcLib|Include/Library/MmcLib.h
-
+  NVLib|Include/Library/NVLib.h
   ##  @libraryclass  
   PostCodeLib|Include/Library/PostLib.h
