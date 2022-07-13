@@ -26,7 +26,7 @@ if [ -z ${VER} ]; then
 VER=2.06
 fi
 if [ -z ${BUILD} ]; then
-BUILD=100.01
+BUILD=100.02
 fi
 if [ -z ${DEBUG} ]; then
 DEBUG=0
