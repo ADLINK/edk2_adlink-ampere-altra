@@ -41,7 +41,7 @@ else
 fi    
 if  [ "${DEVELMENT_MODE}" == "1" ]; then
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
-        PROGRAMMER_TOOL=$OEM_CHIPTOOL_DIR/dpcmd \
+        PROGRAMMER_TOOL=#$OEM_CHIPTOOL_DIR/dpcmd \
         POWER_SCRIPT=$OEM_CHIPTOOL_DIR/target_power.sh \
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
