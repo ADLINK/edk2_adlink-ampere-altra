@@ -24,6 +24,7 @@
   ReportStatusCodeLib|MdeModulePkg/Library/DxeReportStatusCodeLib/DxeReportStatusCodeLib.inf
 
   MmcLib|Library/MmcLib/MmcLib.inf
+  NVLib|Library/NVLib/NVLib.inf
 
 [LibraryClasses.common.DXE_RUNTIME_DRIVER]
   #
