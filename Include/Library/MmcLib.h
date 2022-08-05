@@ -36,4 +36,10 @@ MmcSetPowerOffType (
   IN UINT8  Value
   );
 
+EFI_STATUS
+MmcFirmwareVersion (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
 #endif
