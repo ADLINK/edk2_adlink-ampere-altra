@@ -58,7 +58,7 @@ EFI_ACPI_6_3_FIXED_ACPI_DESCRIPTION_TABLE Fadt = {
   0,                                                                        // UINT8      DayAlrm
   0,                                                                        // UINT8      MonAlrm
   0,                                                                        // UINT8      Century
-  0,                                                                        // UINT16     IaPcBootArch
+  EFI_ACPI_6_4_PCIE_ASPM_CONTROLS,                                          // UINT16     IaPcBootArch
   0,                                                                        // UINT8      Reserved1
   FADT_FLAGS,                                                               // UINT32     Flags
   NULL_GAS,                                                                 // EFI_ACPI_6_3_GENERIC_ADDRESS_STRUCTURE  ResetReg
