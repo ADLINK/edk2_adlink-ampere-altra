@@ -28,6 +28,7 @@
   PrintLib
   PL011UartLib
   BaseMemoryLib
+  NVLib
   
 [Pcd]
   gArmPlatformTokenSpaceGuid.PcdSerialDbgRegisterBase
