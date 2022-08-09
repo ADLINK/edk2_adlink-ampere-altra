@@ -40,7 +40,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  ../edk2_adlink-ampere-altra/AdlinkAmpereAltraPkg.dec
+  AdlinkAmpereAltraPkg.dec
 
 [LibraryClasses]
   UefiApplicationEntryPoint
