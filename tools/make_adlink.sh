@@ -26,7 +26,7 @@ if [ -z ${VER} ]; then
 VER=2.06
 fi
 if [ -z ${BUILD} ]; then
-BUILD=100.03
+BUILD=100.04
 fi
 if [ -z ${DEBUG} ]; then
 DEBUG=0
@@ -41,7 +41,7 @@ else
 fi    
 if  [ "${DEVELMENT_MODE}" == "1" ]; then
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
-        PROGRAMMER_TOOL=$OEM_CHIPTOOL_DIR/dpcmd \
+        PROGRAMMER_TOOL=#$OEM_CHIPTOOL_DIR/dpcmd \
         POWER_SCRIPT=$OEM_CHIPTOOL_DIR/target_power.sh \
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
@@ -70,7 +70,7 @@ else
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
         SPI_SIZE_MB=32 \
-        DEBUG=0 \
+        DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
         tianocore_capsule
     if [ $? -eq 0 ]; then
@@ -81,6 +81,7 @@ else
             CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
             ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
             SPI_SIZE_MB=32 \
+            DEBUG=$DEBUG \
             VER=$VER BUILD=$BUILD \
             history
     fi
