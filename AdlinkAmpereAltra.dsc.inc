@@ -18,11 +18,6 @@
   #
   BoardPcieLib|Library/BoardPcieLib/BoardPcieLib.inf
 
-  #
-  # Library for POST Code converting
-  #
-  ReportStatusCodeLib|MdeModulePkg/Library/DxeReportStatusCodeLib/DxeReportStatusCodeLib.inf
-
   MmcLib|Library/MmcLib/MmcLib.inf
   NVLib|Library/NVLib/NVLib.inf
 
@@ -36,12 +31,9 @@
   # set baudrate to match with MMC
   gArmPlatformTokenSpaceGuid.PcdSerialDbgUartBaudRate|57600
 
-  # Enable POST Code 
-  gEfiMdePkgTokenSpaceGuid.PcdPostCodePropertyMask|0x00000008
-
 ################################################################################
 #
-# Specific Platform Component
+# Specific Module Component
 #
 ################################################################################
 [Components.common]
@@ -53,7 +45,9 @@
     <LibraryClasses>
       DxeServicesLib|MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
   } 
-
+  #
+  # set MMC power off type
+  #
   Drivers/MmcSetPowerOffType/Dxe/MmcSetPowerOffTypeDxe.inf
   Drivers/MmcSetPowerOffType/Pei/MmcSetPowerOffTypePei.inf
 
