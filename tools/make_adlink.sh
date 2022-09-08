@@ -31,6 +31,12 @@ fi
 if [ -z ${DEBUG} ]; then
 DEBUG=0
 fi
+if [ -z ${ATF_SLIM} ]; then
+    ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim
+fi
+if [ -z ${SCP_SLIM} ]; then
+    ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim
+fi
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
@@ -38,18 +44,18 @@ if  [ "${BOARD_STEPPING}" == "A1" ]; then
 else   
     FAILSAFE_WORKAROUND=0
     BOARD_SETTING=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg/"$BOARD_NAME"BoardSetting.cfg
-fi    
+fi
 if  [ "${DEVELMENT_MODE}" == "1" ]; then
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
-        PROGRAMMER_TOOL=#$OEM_CHIPTOOL_DIR/dpcmd \
+        PROGRAMMER_TOOL=$OEM_CHIPTOOL_DIR/dpcmd \
         POWER_SCRIPT=$OEM_CHIPTOOL_DIR/target_power.sh \
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
         VM_SHARED_DIR=$HOME/AmpereR \
         CHECKSUM_TOOL=$OEM_CHIPTOOL_DIR/checksum \
         PACKAGES_PATH=$OEM_PLATFORM_DIR:$OEM_CHIP_DIR:$WORKSPACE/edk2-platforms/Features/Intel/Debugging:$WORKSPACE/OpenPlatformPkg:"${PACKAGES_PATH}" \
-        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
-        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.10.20220531.slim \
+        ATF_SLIM=$ATF_SLIM \
+        SCP_SLIM=$SCP_SLIM \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
@@ -64,8 +70,8 @@ else
         VM_SHARED_DIR=$HOME/AmpereR \
         CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
         PACKAGES_PATH=$OEM_PLATFORM_DIR:$OEM_CHIP_DIR:$WORKSPACE/edk2-platforms/Features/Intel/Debugging:$WORKSPACE/OpenPlatformPkg:"${PACKAGES_PATH}" \
-        ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
-        SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_2.10.20220531.slim \
+        ATF_SLIM=$ATF_SLIM \
+        SCP_SLIM=$SCP_SLIM \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
         LINUXBOOT_BIN=$OEM_CHIPTOOL_DIR/flashkernel \
@@ -79,7 +85,7 @@ else
             BOARD_NAME=$BOARD_NAME \
             VM_SHARED_DIR=$HOME/AmpereR \
             CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
-            ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim \
+            ATF_SLIM=$ATF_SLIM \
             SPI_SIZE_MB=32 \
             DEBUG=$DEBUG \
             VER=$VER BUILD=$BUILD \
