@@ -277,7 +277,6 @@ STATIC ARM_TYPE7 mArmDefaultType7Sk1L2 = {
 STATIC CONST VOID *DefaultCommonTables[] =
 {
   &mArmDefaultType4Sk0,
-  &mArmDefaultType4Sk1,
   NULL
 };
 
