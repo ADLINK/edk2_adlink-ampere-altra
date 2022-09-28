@@ -31,12 +31,11 @@ fi
 if [ -z ${DEBUG} ]; then
 DEBUG=0
 fi
-if [ -z ${ATF_SLIM} ]; then
-    ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim
+if [ -z ${ATF_SCP_VER} ]; then
+    ATF_SCP_VER=2.10.20220531
 fi
-if [ -z ${SCP_SLIM} ]; then
-    ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_2.10.20220531.slim
-fi
+ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_$ATF_SCP_VER.slim
+SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_$ATF_SCP_VER.slim
 if  [ "${BOARD_STEPPING}" == "A1" ]; then
     BUILD=$BUILD.A1
     FAILSAFE_WORKAROUND=1
@@ -47,7 +46,7 @@ else
 fi
 if  [ "${DEVELMENT_MODE}" == "1" ]; then
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
-        PROGRAMMER_TOOL=$OEM_CHIPTOOL_DIR/dpcmd \
+        PROGRAMMER_TOOL=#$OEM_CHIPTOOL_DIR/dpcmd \
         POWER_SCRIPT=$OEM_CHIPTOOL_DIR/target_power.sh \
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
