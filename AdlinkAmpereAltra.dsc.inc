@@ -65,3 +65,5 @@
       PostCodeLib|Library/PostCodeLibMmc/PostCodeLibMmc.inf
       PostCodeMapLib|PostCodeDebugFeaturePkg/Library/PostCodeMapLib/PostCodeMapLib.inf
   }
+
+  Application/BoardVersion/BoardVersion.inf
