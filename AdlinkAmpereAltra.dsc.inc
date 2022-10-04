@@ -20,6 +20,7 @@
 
   MmcLib|Library/MmcLib/MmcLib.inf
   NVLib|Library/NVLib/NVLib.inf
+  OemMiscLib|Library/OemMiscLib/OemMiscLib.inf
 
 [LibraryClasses.common.DXE_RUNTIME_DRIVER]
   #

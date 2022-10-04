@@ -1,0 +1,42 @@
+#/** @file
+#    OemMiscLib.inf
+#
+#    Copyright (c) 2022, Ampere Computing LLC. All rights reserved.
+#    Copyright (c) 2021, NUVIA Inc. All rights reserved.
+#    Copyright (c) 2018, Hisilicon Limited. All rights reserved.
+#    Copyright (c) 2018, Linaro Limited. All rights reserved.
+#
+#    SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = OemMiscLib
+  FILE_GUID                      = 0E49BC62-8A3C-4FC5-ACC1-81AFE94AFD75
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OemMiscLib
+
+[Sources.common]
+  OemMiscLib.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  Silicon/Ampere/AmpereAltraPkg/AmpereAltraPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  AmpereCpuLib
+  DebugLib
+  HobLib
+  UefiLib
+
+[FixedPcd]
+  gArmTokenSpaceGuid.PcdSystemMemoryBase
+
+[Guids]
+  gCpuConfigFormSetGuid
+  gPlatformInfoHobGuid
