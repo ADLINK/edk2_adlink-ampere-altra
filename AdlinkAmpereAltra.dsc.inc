@@ -65,5 +65,7 @@
       PostCodeLib|Library/PostCodeLibMmc/PostCodeLibMmc.inf
       PostCodeMapLib|PostCodeDebugFeaturePkg/Library/PostCodeMapLib/PostCodeMapLib.inf
   }
-
+  #
+  # Application to read EPM board version
+  #
   Application/BoardVersion/BoardVersion.inf
