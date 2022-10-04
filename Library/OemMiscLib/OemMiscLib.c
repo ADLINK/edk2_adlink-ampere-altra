@@ -264,7 +264,7 @@ OemGetMaxProcessors (
   VOID
   )
 {
-  return GetNumberOfSupportedSockets ();
+  return 1;
 }
 
 /**
