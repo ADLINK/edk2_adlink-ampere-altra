@@ -25,3 +25,13 @@
   #
   gEfiMdePkgTokenSpaceGuid.PcdPostCodePropertyMask|0x00000008
 
+################################################################################
+#
+# Specific Module Component
+#
+################################################################################
+[Components.common]
+  #
+  # Driver to initialize GPIO
+  #
+  Drivers/GpioInitDxe/GpioInitDxe.inf
