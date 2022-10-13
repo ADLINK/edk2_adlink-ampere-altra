@@ -5,7 +5,7 @@
 * flashkernel: tiny linux kernel for embedded.
 * make_AvaAp1.sh: Sample script to make ADLINK AVA-AP1.
 * make_adlink.sh: Sample script to make ADLINK project and called by project makeing scripts.
-
+  
 # ADLink tools
 * checksum: provides tradtional 8 digits checksum of a file, source: https://github.com/adlinktech-philxing/checksum_gcc.git
 * Dediprog SPI Programmer
