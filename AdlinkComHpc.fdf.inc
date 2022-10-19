@@ -9,4 +9,4 @@
   #
   # Driver to initialize GPIO
   #
-  INF Drivers/GpioInitDxe/GpioInitDxe.inf
+  # INF Drivers/GpioInitDxe/GpioInitDxe.inf
