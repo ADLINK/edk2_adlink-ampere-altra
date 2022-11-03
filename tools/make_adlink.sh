@@ -27,6 +27,9 @@ fi
 if [ -z ${BUILD} ]; then
 BUILD=100.00
 fi
+if [ -z ${DEVEL_MODE} ]; then
+DEVEL_MODE=0
+fi
 if [ -z ${DEBUG} ]; then
 DEBUG=0
 fi
@@ -44,8 +47,10 @@ else
     BOARD_SETTING=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg/"$BOARD_NAME"BoardSetting.cfg
     git log --pretty=format:"%s" $(git describe --tags --abbrev=0 @^)..@ > $EDK2_PLATFORMS_PKG_DIR/taglog.txt
 fi
-if  [ "${DEVELMENT_MODE}" == "1" ]; then
+
+if  [ "${DEVEL_MODE}" == "1" ]; then
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
+        DEVEL_MODE=TRUE \
         OEM_COMMON_DIR=$OEM_COMMON_DIR \
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
@@ -65,16 +70,16 @@ else
         EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
         BOARD_NAME=$BOARD_NAME \
         RELEASE_DIR=$HOME/AmpereR \
-        CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
         PACKAGES_PATH=$OEM_PLATFORM_DIR:$OEM_COMMON_DIR:$WORKSPACE/edk2-platforms/Features/Intel/Debugging:$WORKSPACE/OpenPlatformPkg:"${PACKAGES_PATH}" \
         ATF_SLIM=$ATF_SLIM \
         SCP_SLIM=$SCP_SLIM \
         FAILSAFE_WORKAROUND=$FAILSAFE_WORKAROUND \
         BOARD_SETTING=$BOARD_SETTING \
-        SPI_SIZE_MB=32 \
         DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
         CROSS_COMPILE=$WORKSPACE/edk2-ampere-tools/toolchain/ampere/bin/aarch64-ampere-linux-gnu- \
+        CHECKSUM_TOOL=$OEM_COMMON_DIR/tools/checksum \
+        SPI_SIZE_MB=32 \
         tianocore_capsule
     if [ $? -eq 0 ]; then
         make -f $WORKSPACE/edk2-ampere-tools/Makefile \
@@ -82,7 +87,7 @@ else
             EDK2_PLATFORMS_PKG_DIR=$EDK2_PLATFORMS_PKG_DIR \
             BOARD_NAME=$BOARD_NAME \
             RELEASE_DIR=$HOME/AmpereR \
-            CHECKSUM_TOOL=./edk2_adlink-ampere-altra/tools/checksum \
+            CHECKSUM_TOOL=$OEM_COMMON_DIR/tools/checksum \
             ATF_SLIM=$ATF_SLIM \
             SPI_SIZE_MB=32 \
             DEBUG=$DEBUG \
