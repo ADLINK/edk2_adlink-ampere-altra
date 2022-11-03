@@ -70,3 +70,7 @@
   # Application to read EPM board version
   #
   Application/BoardVersion/BoardVersion.inf
+  #
+  # Application to reboot to Firmware User Interface (BIOS setup)
+  #
+  Application/FwUi/FwUi.inf
