@@ -34,7 +34,7 @@ if [ -z ${DEBUG} ]; then
 DEBUG=0
 fi
 if [ -z ${ATF_SCP_VER} ]; then
-    ATF_SCP_VER=2.10.20220810
+    ATF_SCP_VER=2.10.20221028
 fi
 ATF_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/atf/altra_atf_signed_$ATF_SCP_VER.slim
 SCP_SLIM=$WORKSPACE/AmpereAltra-ATF-SCP/scp/altra_scp_signed_$ATF_SCP_VER.slim
