@@ -74,3 +74,17 @@
   # Application to reboot to Firmware User Interface (BIOS setup)
   #
   Application/FwUi/FwUi.inf
+
+[PcdsDynamicHii.common.DEFAULT]
+  # Set the "Auto Boot Time-out" Value
+  #
+  #   this change will not effect unless flash whole chip with the 32MB binary file
+  #   
+  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|L"Timeout"|gEfiGlobalVariableGuid|0x0|0
+
+[Components.common]
+  #
+  # Boot Logo
+  #
+  Drivers/LogoDxe/LogoDxe.inf
+  

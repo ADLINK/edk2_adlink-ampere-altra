@@ -19,3 +19,7 @@
   #
   INF Drivers/MmcSetPowerOffType/Dxe/MmcSetPowerOffTypeDxe.inf
   INF Drivers/MmcSetPowerOffType/Pei/MmcSetPowerOffTypePei.inf
+  #
+  # Boot Logo
+  #
+  INF Drivers/LogoDxe/LogoDxe.inf
