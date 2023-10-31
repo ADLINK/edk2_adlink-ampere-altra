@@ -22,7 +22,7 @@ EDK2_PLATFORMS_PKG_DIR=$OEM_PLATFORM_DIR/Platform/Ampere/"$BOARD_NAME"Pkg
 # Firmware Version
 #
 if [ -z ${VER} ]; then
-VER=2.08
+VER=2.09
 fi
 if [ -z ${BUILD} ]; then
 BUILD=100.00
