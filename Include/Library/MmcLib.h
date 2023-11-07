@@ -42,4 +42,11 @@ MmcFirmwareVersion (
   IN UINTN BufferSize
   );
 
+EFI_STATUS
+WolDisableCmd( 
+  );
+  
+EFI_STATUS
+WolEnableCmd( 
+  );
 #endif

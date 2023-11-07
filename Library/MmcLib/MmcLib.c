@@ -111,3 +111,38 @@ MmcFirmwareVersion(
 
   return EFI_SUCCESS;
 }
+
+
+EFI_STATUS
+WolDisableCmd( )
+{
+  UINTN NumberOfBytes;
+  UINT8 wolCmdBuf_1[] = {"[C0 00 3C 00]\r\n"}; // cmd to disable WOL
+  UINTN wolCmdBufSize_1 = sizeof(wolCmdBuf_1);  
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), wolCmdBuf_1, wolCmdBufSize_1);
+
+  if (NumberOfBytes == 0)
+  {
+    return EFI_NO_RESPONSE;
+  }
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+WolEnableCmd( )
+{
+  UINTN NumberOfBytes;
+  UINT8 wolCmdBuf_1[] = {"[C0 00 3C 01]\r\n"}; // cmd to enable WOL
+  UINTN wolCmdBufSize_1 = sizeof(wolCmdBuf_1);  
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), wolCmdBuf_1, wolCmdBufSize_1);
+
+  if (NumberOfBytes == 0)
+  {
+    return EFI_NO_RESPONSE;
+  }
+
+  return EFI_SUCCESS;
+}
