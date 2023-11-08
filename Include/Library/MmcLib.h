@@ -43,6 +43,72 @@ MmcFirmwareVersion (
   );
 
 EFI_STATUS
+IPMI_P3V3_Sensor_Reading (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+IPMI_P12V_Sensor_Reading (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+IPMI_P5V_Sensor_Reading (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+P1V5_VDDH_Sensor_Reading (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+P0V75_PCP_Sensor_Reading (
+  IN UINT8 *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+P0V9_VDDC_RCA_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
+P0V75_VDDC_SOC_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
+P1V2_VDDQ_AB_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
+P1V2_VDDQ_CD_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
+P1V8_PCP_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
+CPU_Temp_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize
+    );
+
+EFI_STATUS
 WolDisableCmd( 
   );
   

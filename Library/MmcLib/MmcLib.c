@@ -112,7 +112,566 @@ MmcFirmwareVersion(
   return EFI_SUCCESS;
 }
 
+EFI_STATUS
+IPMI_P3V3_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 04 2D 01]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[72];
+  UINTN xBufferSize = sizeof(xBuffer);
 
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P3V3_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P3V3_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 04 2D 01]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 04 2D 01]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 63, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+IPMI_P12V_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 08 2D 02]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P12V_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P12V_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 08 2D 02]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 08 2D 02]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+IPMI_P5V_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 0C 2D 03]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P5V_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get IPMI_P5V_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 0C 2D 03]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 0C 2D 03]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P1V5_VDDH_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 10 2D 05]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V5_VDDH_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V5_VDDH_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 10 2D 05]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 10 2D 05]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P0V75_PCP_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 14 2D 06]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V75_PCP_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V75_PCP_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 14 2D 06]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 14 2D 06]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P0V9_VDDC_RCA_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 18 2D 07]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V9_VDDC_RCA_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V9_VDDC_RCA_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 18 2D 07]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 18 2D 07]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P0V75_VDDC_SOC_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 1C 2D 08]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V75_VDDC_SOC_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P0V75_VDDC_SOC_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 1C 2D 08]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 1C 2D 08]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P1V2_VDDQ_AB_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 20 2D 09]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V2_VDDQ_AB_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V2_VDDQ_AB_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 20 2D 09]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 20 2D 09]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P1V2_VDDQ_CD_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 24 2D 0A]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V2_VDDQ_CD_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V2_VDDQ_CD_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 24 2D 0A]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 24 2D 0A]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+P1V8_PCP_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 28 2D 0B]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V8_PCP_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get P1V8_PCP_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 28 2D 0B]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 28 2D 0B]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CPU_Temp_Sensor_Reading(
+    IN UINT8 *Buffer,
+    IN UINTN BufferSize)
+{
+  UINTN NumberOfBytes;
+  UINT8 IpmiCmdBuf[] = {"[10 2C 2D 0C]\r\n"};
+  UINTN IpmiCmdBufSize = sizeof(IpmiCmdBuf);
+  UINT8 xBuffer[42];
+  UINTN xBufferSize = sizeof(xBuffer);
+
+  if (GetFirmwareMajorVersion()==0xA1) {
+    DEBUG((DEBUG_INFO, "%a A1 is not supported\n", __FUNCTION__));
+    return EFI_UNSUPPORTED;
+  }
+
+  NumberOfBytes = PL011UartWrite((UINTN)PcdGet64(PcdSerialDbgRegisterBase), IpmiCmdBuf, IpmiCmdBufSize);
+
+  if (NumberOfBytes == 0)
+  {
+    DEBUG((DEBUG_ERROR, "%a Failed to Get CPU_Temp_Sensor_Reading\n", __FUNCTION__));
+    return EFI_NO_RESPONSE;
+  }
+
+  NumberOfBytes = PL011UartRead((UINTN)PcdGet64(PcdSerialDbgRegisterBase), xBuffer, xBufferSize);
+
+  if (NumberOfBytes == 0)
+  {
+
+    DEBUG((DEBUG_ERROR, "%a Failed to Get CPU_Temp_Sensor_Reading\n", __FUNCTION__));
+
+    return EFI_NO_RESPONSE;
+  }
+
+  DEBUG((DEBUG_INFO, "%a [10 2C 2D 0C]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%02d:%02x ", i, xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  DEBUG((DEBUG_INFO, "%a [10 2C 2D 0C]--->", __FUNCTION__));
+  for (int i=0; i< xBufferSize; i++) {
+    DEBUG((DEBUG_INFO, "%c", xBuffer[i]));
+  }
+  DEBUG((DEBUG_INFO, "\n"));
+
+  CopyMem(Buffer, xBuffer + 33, BufferSize);
+
+  return EFI_SUCCESS;
+}
 EFI_STATUS
 WolDisableCmd( )
 {
