@@ -62,7 +62,7 @@ if  [ "${DEVEL_MODE}" == "1" ]; then
         BOARD_SETTING=$BOARD_SETTING \
         DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
-        CROSS_COMPILE=$WORKSPACE/edk2-ampere-tools/toolchain/ampere/bin/aarch64-ampere-linux-gnu- \
+        CROSS_COMPILE=aarch64-linux-gnu- \
         tianocore_img # linuxboot_img # all # tianocore_capsule # 
 else
     make -f $WORKSPACE/edk2-ampere-tools/Makefile \
@@ -77,7 +77,7 @@ else
         BOARD_SETTING=$BOARD_SETTING \
         DEBUG=$DEBUG \
         VER=$VER BUILD=$BUILD \
-        CROSS_COMPILE=$WORKSPACE/edk2-ampere-tools/toolchain/ampere/bin/aarch64-ampere-linux-gnu- \
+        CROSS_COMPILE=aarch64-linux-gnu- \
         CHECKSUM_TOOL=$OEM_COMMON_DIR/tools/checksum \
         SPI_SIZE_MB=32 \
         tianocore_capsule
